@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "VT323", monospace;
+  --font-sans: "VT323", monospace;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  overflow: hidden;
+}
+
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9997;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+.screen-tear {
+  animation: tear 5s infinite;
+}
+
+@keyframes tear {
+  0%, 90% { transform: translate(0, 0) skew(0); }
+  91% { transform: translate(-5px, 0) skew(2deg); }
+  92% { transform: translate(5px, 0) skew(-2deg); }
+  93% { transform: translate(0, 0) skew(0); }
+  100% { transform: translate(0, 0) skew(0); }
+}
+
+.invert-flash {
+  animation: invert-anim 0.15s;
+}
+
+@keyframes invert-anim {
+  0% { filter: invert(0); }
+  50% { filter: invert(1) hue-rotate(180deg); }
+  100% { filter: invert(0); }
+}
+
+.glitch-wrapper {
+  position: relative;
+}
+
+.glitch-text {
+  position: relative;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.glitch-text::before {
+  left: 3px;
+  text-shadow: -2px 0 #ff00ff;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -3px;
+  text-shadow: -2px 0 #00ffff;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(11px, 9999px, 81px, 0); }
+  20% { clip: rect(62px, 9999px, 12px, 0); }
+  40% { clip: rect(23px, 9999px, 98px, 0); }
+  60% { clip: rect(89px, 9999px, 34px, 0); }
+  80% { clip: rect(45px, 9999px, 76px, 0); }
+  100% { clip: rect(90px, 9999px, 23px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(12px, 9999px, 54px, 0); }
+  40% { clip: rect(87px, 9999px, 32px, 0); }
+  60% { clip: rect(34px, 9999px, 88px, 0); }
+  80% { clip: rect(98px, 9999px, 11px, 0); }
+  100% { clip: rect(21px, 9999px, 67px, 0); }
+}
+
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.4));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.noise {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  background: transparent url('https://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+  background-repeat: repeat;
+  animation: bg-animation .2s infinite;
+  opacity: .4;
+  visibility: visible;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,15%) }
+    80% { transform: translate(3%,35%) }
+    90% { transform: translate(-10%,10%) }
+}
+
+.chromatic-border {
+  border: 2px solid #fff;
+  box-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffff;
+}
+
+.chromatic-text {
+  text-shadow: 1px 1px 0 #ff00ff, -1px -1px 0 #00ffff;
+}
